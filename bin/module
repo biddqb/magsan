@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Validate input
+[[ ! "${1}" =~ ^([a-z]|[A-Z])+_([a-z]|[A-Z])+$ ]] && echo "Please specify a valid VENDOR_MODULE name" && exit 1
+
+IFS='_' read -ra ARRAY <<< "${1}"
+
+VENDOR="${ARRAY[0]}"
+MODULE="${ARRAY[1]}"
+
+MODULE_PATH="app/code/${VENDOR}/${MODULE}"
+
+. $(dirname ${0})/xml/module
+. $(dirname ${0})/php/registration
+if [[ -d "$MODULE_PATH" ]]
+then
+    echo "Module already existed!"
+else
+    mkdir -p "${MODULE_PATH}"
+    mkdir -p "${MODULE_PATH}/etc"
+    echo "${MODULE_CONFIG}" > "${MODULE_PATH}/etc/module.xml"
+    echo "${MODULE_REGISTRATION}" > "${MODULE_PATH}/registration.php"
+fi
+

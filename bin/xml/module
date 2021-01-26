@@ -1,0 +1,14 @@
+#!/bin/bash
+
+MODULE_CONFIG="<?xml version=\"1.0\"?>"$'\n'"
+<!--
+/**
+* Copyright © Magento, Inc. All rights reserved.
+* See COPYING.txt for license details.
+*/
+--> "$'\n'"
+<config xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:noNamespaceSchemaLocation=\"urn:magento:framework:Module/etc/module.xsd\">
+"$'\t'"<module name=\""${VENDOR}_${MODULE}"\" setup_version=\"1.0.0\">
+"$'\t'"</module>
+</config>"
+
